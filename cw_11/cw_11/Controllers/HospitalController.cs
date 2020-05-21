@@ -32,17 +32,19 @@ namespace cw_11.Controllers
         [HttpPut]
         public IActionResult UpdateDoctors(Doctor doc)
         {
-            var d = _context.Doctor.Where(a => a.IdDoctor == doc.IdDoctor).First();
+            var d = _context.Doctor.Where(a => a.IdDoctor == doc.IdDoctor).FirstOrDefault();
+            if (d == null) return NotFound("Brak lekarza w bazie danych");
             d.FirstName = doc.FirstName;
             d.LastName = doc.LastName;
             d.Email = doc.Email;
             _context.SaveChanges();
-            return Ok("Zmieniona dane lekarza");
+            return Ok("Zmieniono dane lekarza");
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteDoctors(string id)
         {
-            var d = _context.Doctor.Where(a => a.IdDoctor == int.Parse(id)).First();
+            var d = _context.Doctor.Where(a => a.IdDoctor == int.Parse(id)).FirstOrDefault();
+            if (d == null) return NotFound("Brak lekarza w bazie danych");
             _context.Doctor.Remove(d);
             _context.SaveChanges();
             return Ok("Usunieto lekarza");
