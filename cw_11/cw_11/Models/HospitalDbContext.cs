@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace cw_11.Models
 {
     //PM> add-migration ... - stworzenie migracji
+    //PM> update-database - zaaktualizowanie bazy danych
+    //PM> script-migration - wyswietlenie skryptu SQL
     public class HospitalDbContext : DbContext
     {
         public DbSet<Doctor> Doctor { get; set; }
